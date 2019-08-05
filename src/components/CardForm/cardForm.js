@@ -86,7 +86,7 @@ export default class App extends React.Component {
     
     const payerRequest = this.createPayerRequest(formData); 
 
-    this.postData('https://morning-lake-33098.herokuapp.com/pay', payerRequest)
+    this.postData('/pay', payerRequest)
       .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
       .catch(error => console.error(error));
  
