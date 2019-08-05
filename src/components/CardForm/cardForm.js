@@ -1,21 +1,21 @@
 import React from "react";
 import { render } from "react-dom";
 import Card from "react-credit-cards";
-import "./styles.css";
-
-
-import SupportedCards from "./Cards";
-
+import "../AppStyles/CardForm.css";
 
 import {
   formatCreditCardNumber,
   formatCVC,
   formatExpirationDate,
   formatFormData,
-} from "./utils";
-
+} from "../utils";
 
 import "react-credit-cards/es/styles-compiled.css";
+import NavBar from "../NavBar/NavBar";
+
+const styles = {
+  marginTop: '0%',
+}
 
 export default class App extends React.Component {
   state = {
@@ -129,31 +129,26 @@ export default class App extends React.Component {
     const { name, number, expiry, cvc, focused, issuer, formData } = this.state;
     return (
       <div key="Payment">
-        <div className="App-payment">
-          <h1>React Credit Cards</h1>
-          <h4>Beautiful credit cards for your payment forms</h4>
-
-          <form ref={c => (this.form = c)} onSubmit={this.handleSubmit}>
+        <NavBar/>
+        <div className="App-payment" style={styles}>
+          <h4 className="text-light">Make a payment</h4>
+            <div className="row">
+              <div className="col col-md-6 col-lg-6 col-sm-12 col-12">
+              <form ref={c => (this.form = c)} onSubmit={this.handleSubmit}>
             <div className="form-group">
               <input
                 type="number"
                 name="number"
+                min="0"
                 className="form-control"
                 placeholder="Amount"
                 required
                 onChange={this.handleInputAmount}
               />
+              <p className ="text-light">USD</p>
             </div>
 
-            <Card
-              number={number}
-              name={name}
-              expiry={expiry}
-              cvc={cvc}
-              focused={focused}
-              callback={this.handleCallback}
-            />
-
+           
             <div className="form-group">
               <input
                 type="tel"
@@ -171,7 +166,7 @@ export default class App extends React.Component {
                 type="text"
                 name="name"
                 className="form-control"
-                placeholder="Name"
+                placeholder="Name on Card"
                 required
                 onChange={this.handleInputChange}
                 onFocus={this.handleInputFocus}
@@ -183,7 +178,7 @@ export default class App extends React.Component {
                   type="tel"
                   name="expiry"
                   className="form-control"
-                  placeholder="Valid Thru"
+                  placeholder="MM / YY"
                   pattern="\d\d/\d\d"
                   required
                   onChange={this.handleInputChange}
@@ -208,9 +203,24 @@ export default class App extends React.Component {
               <button className="btn btn-primary btn-block">PAY</button>
             </div>
           </form>
+
+              </div>
+
+              <div className="col col-md-6 col-lg-6 col-sm-12 col-12">   
+              <Card
+              number={number}
+              name={name}
+              expiry={expiry}
+              cvc={cvc}
+              focused={focused}
+              callback={this.handleCallback}
+            />
       
         </div>
       </div>
+              </div>
+            </div>
+          
     );
   }
 }
