@@ -131,10 +131,10 @@ body {
 
   .form-pay{
     position: absolute;
-    width: 426px;
-    height: 500px;
-    left: 171px;
-    top: 65px;
+    width: 80%;
+    height: 65%;
+    top: 16%;
+    left: 10%;  
     background: #ECF0F4;
     box-shadow: 10px 10px 100px rgba(0, 0, 0, 0.25);
     border-radius: 5px;

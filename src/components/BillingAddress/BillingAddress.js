@@ -1,5 +1,5 @@
 import React from "react";
-import {Form, Button} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import Swal from 'sweetalert2';
 import "../AppStyles/BillingAddress.css";
 
@@ -108,36 +108,72 @@ async postData(url = '', data = {}) {
     
     return (
 
-      <Form onSubmit={this.onSubmitPayment}>
-        <p className= "amount-info">{"$"}{this.props.cardInfo.amount} {"USD"}</p> 
+      <form className= "form-billing"onSubmit={this.onSubmitPayment}>
+        <span className= "text-light">{this.props.cardInfo.amount}</span>
         <span>
-          <p className= "card-info">Billing address for:</p>
-          <p className= "card-info">{this.props.cardInfo.name}</p>
-          <p className= "card-info">{cardBank} {this.props.cardInfo.number.slice(14,19)}</p>
-          <p className= "card-info">{this.props.cardInfo.expiry}</p>
+          <p className= "text-light">Billing address for:</p>
+          <p className= "text-light">{this.props.cardInfo.name}</p>
+          <p className= "text-light">{cardBank} {this.props.cardInfo.number.slice(14,19)}</p>
+          <p className= "text-light">{this.props.cardInfo.expiry}</p>
         </span>
-        <Form.Group >
-          <Form.Control name="Street" type="text" placeholder="Street" onChange={this.handleInputChange} />
-        </Form.Group>
-        <Form.Group >
-          <Form.Control name="City" type="text" placeholder="City" onChange={this.handleInputChange} />
-        </Form.Group>
-        <Form.Group >
-          <Form.Control name="PostalCode" type="number" placeholder="Postal Code" onChange={this.handleInputChange} />
-        </Form.Group>
-        <Form.Group >
-          <Form.Control name="Country" type="text" placeholder="Country" onChange={this.handleInputChange} />
-        </Form.Group>
-        <Form.Group >
-          <Form.Control name="Region" type="text" placeholder="Region" onChange={this.handleInputChange} />
-        </Form.Group>
-        <Button variant="primary" type="submit" onClick={null}>
-          Pay {"$"}{this.props.cardInfo.amount}
-  </Button>
-        <Button variant="primary" type="submit" onClick={this.props.showCardForm}>
-          Back
-  </Button>
-      </Form>
+        <div className="form-group">
+              <input
+                name="Street" 
+                type="text" 
+                placeholder="Street" 
+                onChange={this.handleInputChange}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                name="City" 
+                type="text" 
+                placeholder="City" 
+                onChange={this.handleInputChange}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                name="PostalCode" 
+                type="number" 
+                placeholder="Postal Code" 
+                onChange={this.handleInputChange}
+              />
+            </div>
+            <div className="row">
+              <div className="col-6">
+                <input
+                  name="Country"
+                  type="text" 
+                  placeholder="Country" 
+                  onChange={this.handleInputChange}
+                />
+              </div>
+              <div className="col-6">
+                <input
+                  name="Region" 
+                  type="text" 
+                  placeholder="Region" 
+                  onChange={this.handleInputChange}
+                />
+              </div>
+              <Button 
+              variant="primary" 
+              type="submit" 
+              onClick={/*this.handleClick*/ null}>
+                 Pay
+              </Button>
+              <Button 
+                variant="primary" 
+                type="submit" 
+                onClick={this.props.showCardForm}>
+                  Back
+              </Button>
+            </div>
+            <input type="hidden" name="issuer" value=""/>
+      
+              
+              </form>
 
 
     );
