@@ -45,6 +45,7 @@ export default class App extends React.Component {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       },
       body: JSON.stringify(data),
     });
@@ -96,7 +97,8 @@ export default class App extends React.Component {
      
       
       this.props.showBillingForm(formData);
-    this.postData('http://192.168.100.46:3001/pay', payerRequest)
+  
+    this.postData('https://talentfest-paystand.herokuapp.com/pay', payerRequest)
       .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
       .catch(error => console.error(error));
  
