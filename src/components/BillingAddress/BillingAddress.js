@@ -99,14 +99,22 @@ async postData(url = '', data = {}) {
   return await response.json(); // parses JSON response into native JavaScript objects 
 }
 
-      
+
 
   render() {
-
-
+    let cardBank = global.Payment.fns.cardType('4242 4242 4242 4242');  
+    
+    
     return (
 
       <Form onSubmit={this.onSubmitPayment}>
+        <span className= "text-light">{this.props.cardInfo.amount}</span>
+        <span>
+          <p className= "text-light">Billing address for:</p>
+          <p className= "text-light">{this.props.cardInfo.name}</p>
+          <p className= "text-light">{cardBank} {this.props.cardInfo.number.slice(14,19)}</p>
+          <p className= "text-light">{this.props.cardInfo.expiry}</p>
+        </span>
         <Form.Group >
           <Form.Control name="Street" type="text" placeholder="Street" onChange={this.handleInputChange} />
         </Form.Group>

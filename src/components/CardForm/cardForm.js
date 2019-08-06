@@ -155,6 +155,7 @@ export default class App extends React.Component {
               </div>
             </div>
             <input type="hidden" name="issuer" value={issuer} />
+            
             <div className="form-actions">
               <button className="btn btn-primary btn-block">Go to Billing information</button>
               
