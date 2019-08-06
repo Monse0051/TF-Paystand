@@ -7,7 +7,6 @@ import {
   formatCreditCardNumber,
   formatCVC,
   formatExpirationDate,
-  formatFormData,
 } from "../utils";
 import "react-credit-cards/es/styles-compiled.css";
 import NavBar from "../NavBar/NavBar";
@@ -79,7 +78,7 @@ export default class App extends React.Component {
   };
 
   render() {
-    const { name, number, expiry, cvc, focused, issuer, formData } = this.state;
+    const { name, number, expiry, cvc, focused, issuer } = this.state;
    
     
 
@@ -100,7 +99,7 @@ export default class App extends React.Component {
                 required
                 onChange={this.handleInputAmount}
               />
-              <p className ="text-light">USD</p>
+              <p className ="text-USD">USD</p>
             </div>
             <div className="form-group">
               <input

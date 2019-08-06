@@ -1,5 +1,4 @@
 import React from "react";
-import {Button} from "react-bootstrap";
 import Swal from 'sweetalert2';
 import "../AppStyles/BillingAddress.css";
 
@@ -13,7 +12,8 @@ export default class BillingAddress extends React.Component {
             City:"",
             PostalCode:"",
             Country:"",
-            Region:""
+            Region:"",
+            loading: null
         };
         this.handleInputChange = this.handleInputChange.bind(this);
     }
@@ -25,18 +25,15 @@ export default class BillingAddress extends React.Component {
   };
 
   onSubmitPayment = (e) => {
+    this.setState({loading: true});
     e.preventDefault();
-    console.log(this.state);
-    console.log("DEBUG: card Info:");
-    console.log(this.props.cardInfo);
-
     const billingInfo = this.state;
     const payerRequest = this.createPayerRequest(this.props.cardInfo, billingInfo);
     this.postData('https://talentfest-paystand.herokuapp.com/pay', payerRequest)
       .then(data => {
-        console.log("DEBUG: successful transaction!");
         console.log(JSON.stringify(data));
         if (data.result) {
+          this.setState({loading: false});
           Swal.fire({
             type: 'success',
             title: 'Successful payment transaction!',
@@ -107,16 +104,16 @@ async postData(url = '', data = {}) {
     
     
     return (
-
-      <form className= "form-billing"onSubmit={this.onSubmitPayment}>
-        <span className= "text-light">{this.props.cardInfo.amount}</span>
+      <div className="form-billing">
+      <form onSubmit={this.onSubmitPayment} >
+        <p className = "amount-info">{"$"} {this.props.cardInfo.amount}{" USD"}</p> 
         <span>
-          <p className= "text-light">Billing address for:</p>
-          <p className= "text-light">{this.props.cardInfo.name}</p>
-          <p className= "text-light">{cardBank} {this.props.cardInfo.number.slice(14,19)}</p>
-          <p className= "text-light">{this.props.cardInfo.expiry}</p>
+          <p className= "card-info">Billing address for:</p>
+          <p className= "card-info">{this.props.cardInfo.name}</p>
+          <p className= "card-info">{cardBank} {this.props.cardInfo.number.slice(14,19)}</p>
+          <p className= "card-info">{this.props.cardInfo.expiry}</p>
         </span>
-        <div className="form-group">
+        <div className="form-group formMargin">
               <input
                 name="Street" 
                 type="text" 
@@ -157,23 +154,24 @@ async postData(url = '', data = {}) {
                   onChange={this.handleInputChange}
                 />
               </div>
-              <Button 
-              variant="primary" 
+              <button className="btn btn-block text-center color-btn2" 
               type="submit" 
-              onClick={/*this.handleClick*/ null}>
-                 Pay
-              </Button>
-              <Button 
-                variant="primary" 
+              onClick={/*this.handleClick*/ null}> 
+                 Pay {"$"} {this.props.cardInfo.amount}
+              </button>
+              <button
+                className="btn btn-block text-center color-btn2"
                 type="submit" 
                 onClick={this.props.showCardForm}>
                   Back
-              </Button>
+              </button>
+              {this.state.loading ? <h4>Processing payment...</h4> : null }
             </div>
             <input type="hidden" name="issuer" value=""/>
       
               
               </form>
+              </div>
 
 
     );

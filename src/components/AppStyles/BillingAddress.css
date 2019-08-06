@@ -1,9 +1,11 @@
 .card-info {
     color: rgb(54, 51, 51);
-    text-align: center;
+    text-align: left;
     font-size: 16px;
+    margin-bottom: 0%;
 }
 .amount-info{
+    border-bottom: 2px solid #3E3E3E; 
     font-size: 30px;
     font-weight: bold;
     color: #3E3E3E;
@@ -13,10 +15,22 @@
 .form-billing{
     position: absolute;
     width: 80%;
-    height: 65%;
+    height: 75%;
     top: 16%;
     left: 10%;  
     background: #ECF0F4;
     box-shadow: 10px 10px 100px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
+  }
+
+  .color-btn2{
+    margin-top: 7%;
+    background-color: #2A6FAF;
+    color: #E2E6F0;
+    font-weight: bold;
+    size: 16px;
+  }
+
+  .formMargin{
+      margin-top: 5%;
   }

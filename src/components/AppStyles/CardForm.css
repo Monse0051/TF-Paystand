@@ -139,6 +139,9 @@ body {
     box-shadow: 10px 10px 100px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
   }
+  .text-USD{
+    color: #858B9B;
+  }
   
   @media screen and (min-width: 600px) {
     .App-badges {
