@@ -9,7 +9,6 @@ import {
   formatExpirationDate,
   formatFormData,
 } from "../utils";
-
 import "react-credit-cards/es/styles-compiled.css";
 import NavBar from "../NavBar/NavBar";
 
@@ -18,17 +17,26 @@ const styles = {
 }
 
 export default class App extends React.Component {
-  state = {
-    amount: "",
-    currency: "",
-    email: "",
-    number: "",
-    name: "",
-    expiry: "",
-    cvc: "",
-    issuer: "",
-    focused: "",
-    formData: null
+  constructor(props){
+
+      super(props);
+
+            
+        this.state = {
+          amount: "",
+          currency: "",
+          email: "",
+          number: "",
+          name: "",
+          expiry: "",
+          cvc: "",
+          issuer: "",
+          focused: "",
+          formData: null,
+        
+        }
+
+
   };
 
   async postData(url = '', data = {}) {
@@ -81,11 +89,13 @@ export default class App extends React.Component {
         return acc;
       }, {});
 
-    this.setState({ formData });
-    console.log("pay button pressed!");
+    
     
     const payerRequest = this.createPayerRequest(formData); 
 
+     
+      
+      this.props.showBillingForm(formData);
     this.postData('http://192.168.100.46:3001/pay', payerRequest)
       .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
       .catch(error => console.error(error));
@@ -125,8 +135,12 @@ export default class App extends React.Component {
     };
   }
 
+
   render() {
     const { name, number, expiry, cvc, focused, issuer, formData } = this.state;
+   
+    
+
     return (
       <div key="Payment">
         <NavBar/>
@@ -200,7 +214,10 @@ export default class App extends React.Component {
             </div>
             <input type="hidden" name="issuer" value={issuer} />
             <div className="form-actions">
-              <button className="btn btn-primary btn-block">PAY</button>
+
+              
+              <button className="btn btn-primary btn-block" onClick={this.props.showBillingForm}>Go to Billing information</button>
+          
             </div>
           </form>
 
