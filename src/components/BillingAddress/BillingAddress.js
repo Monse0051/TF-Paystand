@@ -1,6 +1,6 @@
 import React from "react";
 import {Form, Button} from "react-bootstrap";
-
+import Swal from 'sweetalert2';
 
 
 export default class BillingAddress extends React.Component {
@@ -32,7 +32,24 @@ export default class BillingAddress extends React.Component {
     const billingInfo = this.state;
     const payerRequest = this.createPayerRequest(this.props.cardInfo, billingInfo);
     this.postData('https://talentfest-paystand.herokuapp.com/pay', payerRequest)
-      .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
+      .then(data => {
+        console.log("DEBUG: successful transaction!");
+        console.log(JSON.stringify(data));
+        if (data.result) {
+          Swal.fire({
+            type: 'success',
+            title: 'Successful payment transaction!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        } else {
+          Swal.fire({
+            type: 'error',
+            title: 'Oops...',
+            text: 'Error in transaction!',
+          })
+        }
+      }) // JSON-string from `response.json()` call
       .catch(error => console.error(error));
 };
 
