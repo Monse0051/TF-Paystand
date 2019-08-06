@@ -2,6 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 import Card from "react-credit-cards";
 import "../AppStyles/CardForm.css";
+import Logo from '../Images/coola.png';
 
 import {
   formatCreditCardNumber,
@@ -84,8 +85,10 @@ export default class App extends React.Component {
 
     return (
       <div key="Payment">
-        <NavBar/>
         <div className="App-payment form-pay" style={styles}>
+          <div className= "logo">
+        <img src={Logo} width="17%" position="absolute" alt="Logo" />
+        </div>
           <h4 className="text-details">PAYMENT DETAILS</h4>
             <div className="row">
               <div className="col col-md-6 col-lg-6 col-sm-12 col-12">

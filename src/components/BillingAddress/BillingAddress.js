@@ -41,6 +41,7 @@ export default class BillingAddress extends React.Component {
             timer: 1500
           })
         } else {
+          this.setState({loading: false});
           Swal.fire({
             type: 'error',
             title: 'Oops...',
