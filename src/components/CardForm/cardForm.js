@@ -86,8 +86,8 @@ export default class App extends React.Component {
     return (
       <div key="Payment">
         <NavBar/>
-        <div className="App-payment" style={styles}>
-          <h4 className="text-light">Make a payment</h4>
+        <div className="App-payment form-pay" style={styles}>
+          <h4 className="text-details">PAYMENT DETAILS</h4>
             <div className="row">
               <div className="col col-md-6 col-lg-6 col-sm-12 col-12">
               <form ref={c => (this.form = c)} onSubmit={this.handleSubmit}>
@@ -96,20 +96,26 @@ export default class App extends React.Component {
                 type="number"
                 name="amount"
                 min="0"
-                className="form-control"
                 placeholder="Amount"
                 required
                 onChange={this.handleInputAmount}
               />
               <p className ="text-light">USD</p>
             </div>
-
-           
+            <div className="form-group">
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                required
+                onChange={this.handleInputChange}
+                onFocus={this.handleInputFocus}
+              />
+             </div>
             <div className="form-group">
               <input
                 type="tel"
                 name="number"
-                className="form-control"
                 placeholder="Card Number"
                 pattern="[\d| ]{16,22}"
                 required
@@ -121,7 +127,6 @@ export default class App extends React.Component {
               <input
                 type="text"
                 name="name"
-                className="form-control"
                 placeholder="Name on Card"
                 required
                 onChange={this.handleInputChange}
@@ -133,7 +138,6 @@ export default class App extends React.Component {
                 <input
                   type="tel"
                   name="expiry"
-                  className="form-control"
                   placeholder="MM / YY"
                   pattern="\d\d/\d\d"
                   required
@@ -145,7 +149,6 @@ export default class App extends React.Component {
                 <input
                   type="tel"
                   name="cvc"
-                  className="form-control"
                   placeholder="CVC"
                   pattern="\d{3,4}"
                   required
@@ -157,7 +160,7 @@ export default class App extends React.Component {
             <input type="hidden" name="issuer" value={issuer} />
             
             <div className="form-actions">
-              <button className="btn btn-primary btn-block">Go to Billing information</button>
+              <button className="btn btn-block text-center color-btn">Enter Billing Information</button>
               
             </div>
           </form>

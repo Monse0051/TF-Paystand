@@ -1,4 +1,22 @@
 body {
-  background-image: url("../src/components/Images/pepsi-bg.jpg");
+  background-image: url("../src/components/Images/coolabg.jpg");
   background-size: cover;
 }
+
+input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid black;;
+ }
+ .appStyle {
+  padding: 30px;
+  position: absolute;
+  width: 426px;
+  height: 893px;
+  left: 37%;
+  top: 65px;
+ background: #ECF0F4;
+ box-shadow: 10px 10px 100px rgba(0, 0, 0, 0.25);
+ border-radius: 5px;
+ }
