@@ -23,9 +23,10 @@ class App extends React.Component {
   }
 
   showBillingForm = (payerRequest) => {
-    this.setState ({visibleSection: 'billing', payerRequest: payerRequest });
+    this.setState ({visibleSection: 'billing', formData: payerRequest });
     console.log(this.state);
-    
+    console.log("DEBUG: Billing info form");
+    console.log(payerRequest);
     
   }
 
@@ -33,7 +34,7 @@ class App extends React.Component {
   return (
     <div>
       {this.state.visibleSection === 'card' && <CardForm showBillingForm = {this.showBillingForm}/> }
-      {this.state.visibleSection === 'billing' && <BillingAddress showCardForm = {this.showCardForm}/> }
+      {this.state.visibleSection === 'billing' && <BillingAddress showCardForm = {this.showCardForm} cardInfo={this.state.formData}/> }
       </div>
   );
 }

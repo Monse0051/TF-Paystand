@@ -18,10 +18,8 @@ const styles = {
 
 export default class App extends React.Component {
   constructor(props){
-
       super(props);
-
-            
+           
         this.state = {
           amount: "",
           currency: "",
@@ -32,25 +30,9 @@ export default class App extends React.Component {
           cvc: "",
           issuer: "",
           focused: "",
-          formData: null,
-        
+          formData: null        
         }
-
-
   };
-
-  async postData(url = '', data = {}) {
-    // Default options are marked with *
-      const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      },
-      body: JSON.stringify(data),
-    });
-    return await response.json(); // parses JSON response into native JavaScript objects 
-  }
 
   handleCallback = ({ issuer }, isValid) => {
     if (isValid) {
@@ -90,53 +72,11 @@ export default class App extends React.Component {
         return acc;
       }, {});
 
-    
-    
-    const payerRequest = this.createPayerRequest(formData); 
-
-     
-      
-      this.props.showBillingForm(formData);
-  
-    this.postData('https://talentfest-paystand.herokuapp.com/pay', payerRequest)
-      .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
-      .catch(error => console.error(error));
+    console.log("DEBUG: go to billing info button");
  
     this.form.reset();
+    this.props.showBillingForm(formData);
   };
-
-  createPayerRequest(formData){
-    return {
-      "amount": "5000.00",
-      "currency": "USD",
-      "card": {
-        "nameOnCard": "Christopher",
-        "cardNumber": "4242424242424242",
-        "expirationMonth": "03",
-        "expirationYear": "2020",
-        "securityCode": "123",
-        "billingAddress": {
-          "street1": "41 Grandview St Unit C",
-          "city": "Santa Cruz",
-          "state": "CA",
-          "postalCode": "95060",
-          "country": "USA"
-        }
-      },
-      "payer": {
-        "name": "Christina C",
-        "email": "cchen+test@paystand.com",
-        "address": {
-          "street1": "41 Grandview St Unit C",
-          "city": "Santa Cruz",
-          "state": "CA",
-          "postalCode": "95060",
-          "country": "USA"
-        }
-      }
-    };
-  }
-
 
   render() {
     const { name, number, expiry, cvc, focused, issuer, formData } = this.state;
@@ -154,7 +94,7 @@ export default class App extends React.Component {
             <div className="form-group">
               <input
                 type="number"
-                name="number"
+                name="amount"
                 min="0"
                 className="form-control"
                 placeholder="Amount"
@@ -216,10 +156,8 @@ export default class App extends React.Component {
             </div>
             <input type="hidden" name="issuer" value={issuer} />
             <div className="form-actions">
-
+              <button className="btn btn-primary btn-block">Go to Billing information</button>
               
-              <button className="btn btn-primary btn-block" onClick={this.props.showBillingForm}>Go to Billing information</button>
-          
             </div>
           </form>
 
